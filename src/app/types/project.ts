@@ -11,3 +11,8 @@ export type Project = {
     image?: string;
 
 }
+
+export type Skill = {
+    category: string;
+    skills: string[];
+}
