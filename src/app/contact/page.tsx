@@ -7,10 +7,16 @@ export default function Contact() {
     name: "",
     email: "",
     message: "",
+    company: "",
   });
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
       e.preventDefault();
+
+      setLoading(true);
+      setStatus("Sending...");
 
        const res = await fetch("/api/contact", {
         method: "POST",
@@ -25,11 +31,13 @@ export default function Contact() {
   console.log("API RESPONSE:", data);
 
   if (res.ok) {
-    alert("Message sent!");
-    setForm({ name: "", email: "", message: "" });
+    setStatus("Message sent successfully!");
+    setForm({ name: "", email: "", message: "", company: "" });
   } else {
-    alert("Something went wrong.");
+    setStatus("Failed to send message. Please try again.");
   }
+
+  setLoading(false);
   }
 
   return (
@@ -76,20 +84,36 @@ export default function Contact() {
           required
         />
 
+        <input
+          type="text"
+          name="company"
+          value={form.company}
+          onChange={(e) => setForm({ ...form, company: e.target.value })}
+          style={{ display: "none" }}
+        />
+
         <button
           type="submit"
+          disabled={loading}
           style={{
+            opacity: loading ? 0.6 : 1,
             backgroundColor: "#2563eb",
             color: "white",
             padding: "12px 20px",
             borderRadius: "8px",
             border: "none",
-            cursor: "pointer",
+            cursor: loading ? "not-allowed" : "pointer",
             fontWeight: "600"
           }}
         >
-          Send Message
+          {loading ? "Sending..." : "Send Message"}
         </button>
+
+        {status && (
+        <p className="mt-4 text-sm text-gray-700">
+          {status}
+        </p>
+        )}
       </form>
 
       {/* Divider */}

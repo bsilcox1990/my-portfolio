@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
 
         <footer className="text-center py-6 text-black/50 text-sm">
-          © {new Date().getFullYear()} Brad
+          © {new Date().getFullYear()} Brad Silcox
         </footer>
       </body>
     </html>
