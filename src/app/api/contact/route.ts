@@ -20,11 +20,9 @@ export async function POST(req: Request) {
         ${message}
       `
     });
-    console.log("email response", data);
 
     return Response.json({ success: true });
   } catch (error) {
-    console.log("email error", error);
     return Response.json({ error });
   }
 }
