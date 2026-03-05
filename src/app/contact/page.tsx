@@ -31,7 +31,7 @@ export default function Contact() {
   console.log("API RESPONSE:", data);
 
   if (res.ok) {
-    setStatus("Message sent successfully!");
+    setStatus("✅ Message sent successfully. I’ll get back to you soon.");
     setForm({ name: "", email: "", message: "", company: "" });
   } else {
     setStatus("Failed to send message. Please try again.");
